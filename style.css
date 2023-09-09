@@ -1,38 +1,33 @@
 /* Define the color scheme */
 :root {
-    --tiffany-blue: #75ddddff;
-    --blue-munsell: #508991ff;
-    --prussian-blue: #172a3aff;
-    --midnight-green: #004346ff;
-    --mint: #09bc8aff;
-    --thistle: #e2cfeaff;
-    --harvest-gold: #eca400ff;
-  }
-  
-  /* Highlight and error styles for text input */
-  .highlight {
-    color: white;
-  }
+  --tiffany-blue: #75ddddff;
+  --blue-munsell: #508991ff;
+  --prussian-blue: #172a3aff;
+  --midnight-green: #004346ff;
+  --mint: #09bc8aff;
+  --thistle: #e2cfeaff;
+  --harvest-gold: #eca400ff;
+}
 
-  .passed {
-    color: var(--tiffany-blue);
-  }
+/* Highlight and error styles for text input */
+.highlight {
+  color: white;
+}
 
-  .text-error {
-    color: #e74c3c;
-    text-decoration: underline;
-  }
-  
-  .error {
-    background-color: lightcoral;
-    border-color: #e74c3c;
-  }
+.passed {
+  color: var(--tiffany-blue);
+}
 
-  h1 {
-    color: var(--harvest-gold) !important;
-  }
-  
+.text-error {
+  color: #e74c3c;
+  text-decoration: underline;
+}
 
-.input-container {
-  padding-bottom: 25rem;
+.error {
+  background-color: lightcoral;
+  border-color: #e74c3c;
+}
+
+h1 {
+  color: var(--harvest-gold) !important;
 }
