@@ -32,5 +32,17 @@
     color: var(--harvest-gold) !important;
   }
   
-  
+  #input-container {
+    position: sticky;
+    bottom: 0;
+    padding: 10px;
+}
+
+/* Adjust the container's behavior on different screen sizes */
+@media (min-width: 576px) {
+    #input-container {
+        padding: 15px;
+    }
+}
+
   
