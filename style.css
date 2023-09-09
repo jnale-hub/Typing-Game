@@ -32,5 +32,27 @@
     color: var(--harvest-gold) !important;
   }
   
-  
+  .input-container {
+    padding: 10px;
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    z-index: 1000; /* Ensure it's above the keyboard */
+}
+
+/* Adjust the container's behavior on different screen sizes */
+@media (min-width: 576px) {
+    .input-container {
+        padding: 15px;
+    }
+}
+
+/* Custom CSS to adjust viewport height for mobile devices */
+@media (max-width: 576px) {
+    body {
+        height: 100vh; /* Ensure full viewport height */
+        overflow-y: auto; /* Enable scrolling when the keyboard is displayed */
+    }
+}
+
   
