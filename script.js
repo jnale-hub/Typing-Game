@@ -1,3 +1,5 @@
+import { sherlockQuotes, strangerThingsQuotes, modernFamilyQuotes, gameOfThronesQuotes, moneyHeistQuotes } from "./quotes.js";
+
 // store the list of words and the index of the word the player is currently typing
 let words = [];
 let passedWords = [];
@@ -12,19 +14,44 @@ const quoteElement = document.getElementById('quote');
 const messageElement = document.getElementById('message');
 const typedValueElement = document.getElementById('typed-value');
 const startButton = document.getElementById('start');
+const dropdownbutton = document.getElementById('dropdown');
+
+let quotes = sherlockQuotes;
+
+document.getElementById('sherlock').addEventListener('click', () => {
+  quotes = sherlockQuotes;
+  startGame();
+  dropdownbutton.innerText = 'Sherlock Holmes';
+});
+
+document.getElementById('strangerThings').addEventListener('click', () => {
+  quotes = strangerThingsQuotes;
+  startGame();
+  dropdownbutton.innerText = 'Stranger Things';
+});
+
+document.getElementById('moneyHeist').addEventListener('click', () => {
+  quotes = moneyHeistQuotes;
+  startGame();
+  dropdownbutton.innerText = 'Money Heist';
+});
+
+document.getElementById('gameOfThrones').addEventListener('click', () => {
+  quotes = gameOfThronesQuotes;
+  startGame();
+  dropdownbutton.innerText = 'Game of Thrones';
+});
+
+document.getElementById('modernFamily').addEventListener('click', () => {
+  quotes = modernFamilyQuotes;
+  startGame();
+  dropdownbutton.innerText = 'Modern Family';
+});
 
 startButton.addEventListener('click', startGame);
 typedValueElement.addEventListener('input', handleInput);
 
-async function startGame() {
-
-  const response = await fetch('quotes.json');
-  if (!response.ok) {
-    throw new Error('Failed to load quotes');
-  }
-  
-  const data = await response.json();
-  const quotes = data;
+function startGame() {
 
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];

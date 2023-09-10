@@ -7,25 +7,44 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 
 <body class="bg-dark text-white-50">
     <div class="container">
         <h1 class="fw-bold mt-5 text-center">Typing Game!</h1>
-        <p class="text-center mb-3">Practice your typing skills with a quote from Sherlock Holmes. Click start to begin!</p>
-        <p id="message" class="text-center fw-bold border d-none p-2 fs-5 mx-lg-5"></p> <!-- This will display any status messages -->
+        <div class="text-center mb-3 dropdown">Practice your typing skills with a quote from 
+            <a class="dropdown-toggle text-reset"
+                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown">
+                Sherlock Holmes</a>
+            <ul class="dropdown-menu z-3">
+                <li><a class="dropdown-item" href="#" id="sherlock">Sherlock Holmes</a></li>
+                <li><a class="dropdown-item" href="#" id="strangerThings">Stranger Things</a></li>
+                <li><a class="dropdown-item" href="#" id="moneyHeist">Money Heist</a></li>
+                <li><a class="dropdown-item" href="#" id="gameOfThrones">Game of Thrones</a></li>
+                <li><a class="dropdown-item" href="#" id="modernFamily">Modern Family</a></li>
+            </ul>
+        </div>
+        <p id="message" class="text-center fw-bold border d-none p-2 fs-5 mx-lg-5"></p>
+        <!-- This will display any status messages -->
         <div class="px-md-5 px-2">
             <p id="quote" class="fs-5 text-center"></p> <!-- This will display our quote -->
-            <div class="text-center sticky-bottom input-container pb-5">
-                <input type="text" aria-label="current word" id="typed-value" class="bg-light"/> <!-- The textbox for typing -->
+            <div class="text-center sticky-bottom input-container pb-5 z-2">
+                <input type="text" aria-label="current word" id="typed-value" class="bg-light" />
+                <!-- The textbox for typing -->
                 <button type="button" id="start">Start</button> <!-- To start the game -->
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+        crossorigin="anonymous"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>
