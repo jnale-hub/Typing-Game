@@ -18,41 +18,39 @@ const dropdownbutton = document.getElementById('dropdown');
 
 let quotes = sherlockQuotes;
 
-document.getElementById('sherlock').addEventListener('click', () => {
-  quotes = sherlockQuotes;
-  startGame();
-  dropdownbutton.innerText = 'Sherlock Holmes';
-});
+const dropdownItems = document.querySelectorAll('.dropdown-item');
 
-document.getElementById('strangerThings').addEventListener('click', () => {
-  quotes = strangerThingsQuotes;
-  startGame();
-  dropdownbutton.innerText = 'Stranger Things';
-});
-
-document.getElementById('moneyHeist').addEventListener('click', () => {
-  quotes = moneyHeistQuotes;
-  startGame();
-  dropdownbutton.innerText = 'Money Heist';
-});
-
-document.getElementById('gameOfThrones').addEventListener('click', () => {
-  quotes = gameOfThronesQuotes;
-  startGame();
-  dropdownbutton.innerText = 'Game of Thrones';
-});
-
-document.getElementById('modernFamily').addEventListener('click', () => {
-  quotes = modernFamilyQuotes;
-  startGame();
-  dropdownbutton.innerText = 'Modern Family';
+dropdownItems.forEach(item => {
+  item.addEventListener('click', () => {
+    // Assign the quotes based on the clicked item's id
+    switch (item.id) {
+      case 'sherlock':
+        quotes = sherlockQuotes;
+        break;
+      case 'strangerThings':
+        quotes = strangerThingsQuotes;
+        break;
+      case 'modernFamily':
+        quotes = modernFamilyQuotes;
+        break;
+      case 'gameOfThrones':
+        quotes = gameOfThronesQuotes;
+        break;
+      case 'moneyHeist':
+        quotes = moneyHeistQuotes;
+        break;
+      default:
+        quotes = sherlockQuotes; 
+    }
+    startGame();
+    dropdownbutton.innerText = item.innerText;
+  });
 });
 
 startButton.addEventListener('click', startGame);
 typedValueElement.addEventListener('input', handleInput);
 
 function startGame() {
-
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
 
@@ -108,6 +106,7 @@ function handleInput() {
     messageElement.classList.add('d-block');
     messageElement.classList.remove('d-none');
     messageElement.innerText = message;
+    quoteElement.childNodes[wordIndex].className = 'passed';
   } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
     // end of word
     // Count the word
