@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <!-- Title -->
+        <div class="container-sm p-5 my-5 mx-5 md:mx-40 rounded-md text-center bg-base-300 border font-bold">
+            Practice your typing skills with a quote from
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="underline decoration-accent hover:decoration-accent-focus active:decoration-accent-focus">Sherlock Holmes</label>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a class="dropdown-item" href="#" id="sherlock">Sherlock Holmes</a></li>
+                    <li><a class="dropdown-item" href="#" id="strangerThings">Stranger Things</a></li>
+                    <li><a class="dropdown-item" href="#" id="moneyHeist">Money Heist</a></li>
+                    <li><a class="dropdown-item" href="#" id="gameOfThrones">Game of Thrones</a></li>
+                    <li><a class="dropdown-item" href="#" id="modernFamily">Modern Family</a></li>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+        <!-- Message -->
+        <div class="container">
+            <p id="message" class="text-center font-bold hidden p-2 text-lg mx-lg-5"></p>
+        </div>
+
+        <div class="border bg-base-300 p-5 my-5 mx-5 md:mx-40 rounded-md">
+            <!-- Quote -->
+            <div class="text-center px-4 py-16 bg-base-200"><span id="quote" class=""></span>
+            </div>
+
+            <!-- Input -->
+            <div class="text-center sticky inset-x-0 bottom-0 input-container py-5 z-50">
+                <input type="text" aria-label="current word" id="typed-value"
+                    class="input input-accent w-full max-w-xs" />
+                <!-- The textbox for typing -->
+                <button type="button" id="start" class="mt-2 btn-accent px-5 py-2 text-primary-accent">Start</button>
+                <!-- To start the game -->
+            </div>
+
+        </div>
+    </main>
+
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
