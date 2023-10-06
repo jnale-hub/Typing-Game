@@ -18,38 +18,43 @@ let passedWords = [];
 let wordIndex = 0;
 let wordsTyped = 0;
 
-let quotes = sherlockQuotes;
+  
+function getQuotes() {
+  
+  let quotes = sherlockQuotes;
 
-const dropdownbutton = document.querySelector(".dropdown label");
-const dropdownItems = document.querySelectorAll(".dropdown-item");
+  const dropdownButton = document.querySelector(".dropdown label");
+  const dropdownItems = document.querySelectorAll(".dropdown-item");
 
-// Event listener for dropdown items
-dropdownItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    // Assign the quotes based on the clicked item's id
-    switch (item.id) {
-      case "sherlock":
-        quotes = sherlockQuotes;
-        break;
-      case "strangerThings":
-        quotes = strangerThingsQuotes;
-        break;
-      case "modernFamily":
-        quotes = modernFamilyQuotes;
-        break;
-      case "gameOfThrones":
-        quotes = gameOfThronesQuotes;
-        break;
-      case "moneyHeist":
-        quotes = moneyHeistQuotes;
-        break;
-      default:
-        quotes = sherlockQuotes;
-    }
-    dropdownbutton.innerText = item.innerText;
-    startGame();
+  dropdownItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      // Assign the quotes based on the clicked item's id
+      switch (item.id) {
+        case "sherlock":
+          quotes = sherlockQuotes;
+          break;
+        case "strangerThings":
+          quotes = strangerThingsQuotes;
+          break;
+        case "modernFamily":
+          quotes = modernFamilyQuotes;
+          break;
+        case "gameOfThrones":
+          quotes = gameOfThronesQuotes;
+          break;
+        case "moneyHeist":
+          quotes = moneyHeistQuotes;
+          break;
+        default:
+          quotes = sherlockQuotes;
+      }
+      dropdownButton.innerText = item.innerText;
+      startGame();
+    });
   });
-});
+
+  return quotes;
+}
 
 START_BUTTON.addEventListener("click", startGame);
 TYPED_VALUE_ELEMENT.addEventListener("input", handleInput);
@@ -63,7 +68,7 @@ function startGame(restart) {
   if (restart !== true) {
     timer();
   }
-
+  let quotes = getQuotes();
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
 
