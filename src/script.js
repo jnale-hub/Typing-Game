@@ -1,3 +1,4 @@
+// main.js
 import {
   sherlockQuotes,
   strangerThingsQuotes,
@@ -6,23 +7,26 @@ import {
   moneyHeistQuotes,
 } from "./quotes.js";
 
-// Constants
-const QUOTE_ELEMENT = document.getElementById("quote");
-const MESSAGE_ELEMENT = document.getElementById("message");
-const TYPED_VALUE_ELEMENT = document.getElementById("typed-value");
-const START_BUTTON = document.getElementById("start");
-const TIME_ALLOTMENT = 120;
+// Encapsulate the data
+const data = {
+  quotes : sherlockQuotes,
+  restart : null,
+};
 
-let words = [];
-let passedWords = [];
-let wordIndex = 0;
-let wordsTyped = 0;
+// Call the initializeDropdown function when your page loads
+document.addEventListener("DOMContentLoaded", () => {
 
+  START_BUTTON.addEventListener("click", () => {
+    startGame(data);
+  });
+
+  TYPED_VALUE_ELEMENT.addEventListener("input", handleInput);
   
-function getQuotes() {
-  
-  let quotes = sherlockQuotes;
+  handleDropdown(data);
+});
 
+function handleDropdown(data) {
+  let { quotes } = data;
   const dropdownButton = document.querySelector(".dropdown label");
   const dropdownItems = document.querySelectorAll(".dropdown-item");
 
@@ -49,29 +53,40 @@ function getQuotes() {
           quotes = sherlockQuotes;
       }
       dropdownButton.innerText = item.innerText;
+      console.log(quotes);
       startGame();
     });
   });
-
-  return quotes;
 }
 
-START_BUTTON.addEventListener("click", startGame);
-TYPED_VALUE_ELEMENT.addEventListener("input", handleInput);
+// Constants
+const QUOTE_ELEMENT = document.getElementById("quote");
+const MESSAGE_ELEMENT = document.getElementById("message");
+const TYPED_VALUE_ELEMENT = document.getElementById("typed-value");
+const START_BUTTON = document.getElementById("start");
+const TIME_ALLOTMENT = 120;
 
-function startGame(restart) {
+let words = [];
+let passedWords = [];
+let wordIndex = 0;
+let wordsTyped = 0;
+
+
+function startGame(data) {
+  const { quotes, restart } = data;
+  console.log(quotes);
   TYPED_VALUE_ELEMENT.disabled = false;
   document.querySelector(".countdown").classList.remove("hidden");
   document.getElementById("wpm").innerText = "";
-  MESSAGE_ELEMENT.innerText = "";
 
   if (restart !== true) {
     timer();
   }
-  let quotes = getQuotes();
+
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
 
+  console.log(quotes);
   // Put the quote into an array of words
   words = quote.split(" ");
 
@@ -101,7 +116,10 @@ function handleInput() {
   const isCurrentlyCorrect = currentWord.startsWith(typedValue);
 
   if (isEndOfSentence) {
-    startGame(true);
+    let { quotes } = data;
+    const ifRestart = true;
+    const newData = { quotes: quotes, restart: ifRestart };
+    startGame(newData);
     wordsTyped++;
   } else if (isEndOfWord) {
     wordsTyped++;
