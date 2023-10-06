@@ -11,7 +11,7 @@ const QUOTE_ELEMENT = document.getElementById("quote");
 const MESSAGE_ELEMENT = document.getElementById("message");
 const TYPED_VALUE_ELEMENT = document.getElementById("typed-value");
 const START_BUTTON = document.getElementById("start");
-const TIME_ALLOTMENT = 20;
+const TIME_ALLOTMENT = 120;
 
 let words = [];
 let passedWords = [];
