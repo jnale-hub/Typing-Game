@@ -10,6 +10,14 @@
 
 <body>
     <main>
+        <!-- Menu -->
+        <div class="mx-5 md:mx-40 my-5 font-mono text-2xl">
+            <span class="countdown">
+                <span id="minutes" style="--value: 00;"></span>:
+                <span id="seconds" style="--value: 00;"></span>
+              </span>
+              <span id="wpm"></span>
+        </div>
         <!-- Title -->
         <div class="container-sm p-5 my-5 mx-5 md:mx-40 rounded-md text-center bg-base-300 border font-bold">
             Practice your typing skills with a quote from
@@ -26,30 +34,27 @@
         </div>
         </div>
 
-        <!-- Message -->
-        <div class="container">
-            <p id="message" class="text-center font-bold hidden p-2 text-lg mx-lg-5"></p>
-        </div>
-
         <div class="border bg-base-300 p-5 my-5 mx-5 md:mx-40 rounded-md">
+
+            <!-- Message -->
+            <div id="message" class="text-center text-2xl font-extrabold pb-2"></div>
             <!-- Quote -->
-            <div class="text-center px-4 py-16 bg-base-200"><span id="quote" class=""></span>
+            <div class="text-center px-4 py-16 bg-base-200"><span id="quote" class="text-lg font-mono"></span>
             </div>
 
             <!-- Input -->
             <div class="text-center sticky inset-x-0 bottom-0 input-container py-5 z-50">
                 <input type="text" aria-label="current word" id="typed-value"
-                    class="input input-accent w-full max-w-xs" />
+                    class="input input-accent w-full min-w-xs max-w-xs inline-block align-middle mt-2"/>
                 <!-- The textbox for typing -->
-                <button type="button" id="start" class="mt-2 btn-accent px-5 py-2 text-primary-accent">Start</button>
+                <button type="button" id="start" class="btn btn-accent text-primary-accent inline-block align-middle mt-2 ml-2">Start</button>
                 <!-- To start the game -->
             </div>
-
         </div>
     </main>
 
 
-    <script type="module" src="src/script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>
