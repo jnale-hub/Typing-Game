@@ -54,12 +54,14 @@ dropdownItems.forEach(item => {
 START_BUTTON.addEventListener('click', startGame);
 TYPED_VALUE_ELEMENT.addEventListener('input', handleInput);
 
-function startGame() {
-
+function startGame(restart) {
   TYPED_VALUE_ELEMENT.disabled = false;
-  document.querySelector(".countdown").classList.remove = "hidden";
+  document.querySelector(".countdown").classList.remove("hidden");
   document.getElementById("wpm").innerText = "";
-  timer();
+
+  if (restart !== true) {
+    timer();
+  }
 
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
@@ -86,32 +88,32 @@ function handleInput() {
   const currentWord = words[wordIndex];
   const typedValue = TYPED_VALUE_ELEMENT.value;
 
-  if (typedValue === currentWord && wordIndex === words.length - 1) {
-    // End of sentence
-    startGame();
+  
+  const isEndOfSentence = typedValue === currentWord && wordIndex === words.length - 1;
+  const isEndOfWord = typedValue.endsWith(' ') && typedValue.trim() === currentWord;
+  const isCurrentlyCorrect = currentWord.startsWith(typedValue);
+
+  if (isEndOfSentence) {
+    startGame(true);
     wordsTyped++;
-  } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
-    // End of word
+  } else if (isEndOfWord) {
     wordsTyped++;
     passedWords.push(currentWord);
     TYPED_VALUE_ELEMENT.value = '';
     wordIndex++;
     QUOTE_ELEMENT.childNodes[wordIndex].className = 'text-accent-content bg-accent';
-  } else if (currentWord.startsWith(typedValue)) {
-    // Currently correct
-    TYPED_VALUE_ELEMENT.className = 'input input-accent w-full max-w-xs';
-    START_BUTTON.className = 'btn btn-accent text-accent-content';
+  } else if (isCurrentlyCorrect) {
+    TYPED_VALUE_ELEMENT.className = 'input input-accent w-full max-w-xs  inline-block align-middle mt-2';
+    START_BUTTON.className = 'btn btn-accent text-accent-content inline-block align-middle mt-2 ml-2';
     QUOTE_ELEMENT.childNodes[wordIndex].className = 'text-accent-content bg-accent';
   } else {
-    // Error state
-    START_BUTTON.className = 'btn btn-primary text-primary-content';
-    TYPED_VALUE_ELEMENT.className = 'input input-primary w-full max-w-xs';
+    START_BUTTON.className = 'btn btn-primary text-primary-content inline-block align-middle mt-2 ml-2';
+    TYPED_VALUE_ELEMENT.className = 'input input-primary w-full max-w-xs  inline-block align-middle mt-2';
     QUOTE_ELEMENT.childNodes[wordIndex].className = 'text-primary-content bg-primary';
   }
 
   for (let i = 0; i < passedWords.length; i++) {
-    // Passed word
-    QUOTE_ELEMENT.childNodes[i].className = 'text-neutral-content bg-neutral';
+    QUOTE_ELEMENT.childNodes[i].classList.add('text-neutral-content', 'bg-neutral');
   }
 }
 
@@ -151,6 +153,8 @@ function timer() {
 
 
 function handleGameOver() {
+  
+  TYPED_VALUE_ELEMENT.value = '';
   TYPED_VALUE_ELEMENT.disabled = true;
 
   // Calculate elapsed time in minutes
@@ -158,8 +162,8 @@ function handleGameOver() {
   const wpm = Math.round(wordsTyped / time);
  
   MESSAGE_ELEMENT.innerText = 'TIMES UP!';
-  document.querySelector(".countdown").classList.add = "hidden";
-  document.getElementById("wpm").innerText = `WPM : ${wpm, time, wordsTyped}`;
+  document.querySelector(".countdown").classList.add("hidden");
+  document.getElementById("wpm").innerText = `WPM : ${wpm}`;
 }
 
 
