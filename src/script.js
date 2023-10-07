@@ -29,6 +29,7 @@ function handleDropdown(data) {
   let { quotes } = data;
   const dropdownButton = document.querySelector(".dropdown label");
   const dropdownItems = document.querySelectorAll(".dropdown-item");
+  const htmlTheme = document.querySelector("html");
 
   dropdownItems.forEach((item) => {
     item.addEventListener("click", () => {
@@ -36,25 +37,29 @@ function handleDropdown(data) {
       switch (item.id) {
         case "sherlock":
           quotes = sherlockQuotes;
+          htmlTheme.dataset.theme = "retro";
           break;
         case "strangerThings":
           quotes = strangerThingsQuotes;
+          htmlTheme.dataset.theme = "stranger";
           break;
         case "modernFamily":
           quotes = modernFamilyQuotes;
+          htmlTheme.dataset.theme = "fantasy";
           break;
         case "gameOfThrones":
           quotes = gameOfThronesQuotes;
+          htmlTheme.dataset.theme = "got";
           break;
         case "moneyHeist":
           quotes = moneyHeistQuotes;
+          htmlTheme.dataset.theme = "money_heist";
           break;
-        default:
-          quotes = sherlockQuotes;
       }
       dropdownButton.innerText = item.innerText;
-      console.log(quotes);
-      startGame();
+      document.querySelector("title").innerText = item.innerText + " | Typing Game";
+      const newData = { quotes: quotes };
+      startGame(newData);
     });
   });
 }
@@ -78,6 +83,7 @@ function startGame(data) {
   TYPED_VALUE_ELEMENT.disabled = false;
   document.querySelector(".countdown").classList.remove("hidden");
   document.getElementById("wpm").innerText = "";
+  MESSAGE_ELEMENT.innerText = "";
 
   if (restart !== true) {
     timer();
