@@ -112,26 +112,44 @@ function handleInput() {
   const currentWord = words[wordIndex];
   const typedValue = TYPED_VALUE_ELEMENT.value;
 
-  const isEndOfSentence =
-    typedValue === currentWord && wordIndex === words.length - 1;
-  const isEndOfWord =
-    typedValue.endsWith(" ") && typedValue.trim() === currentWord;
-  const isCurrentlyCorrect = currentWord.startsWith(typedValue);
+  if (isEndOfSentence(currentWord, typedValue)) {
+    handleEndOfSentence();
+  } else if (isEndOfWord(currentWord, typedValue)) {
+    handleEndOfWord();
+  } else {
+    handleTypingStatus(currentWord, typedValue);
+  }
 
-  if (isEndOfSentence) {
-    let { quotes } = data;
-    const ifRestart = true;
-    const newData = { quotes: quotes, restart: ifRestart };
-    startGame(newData);
-    wordsTyped++;
-  } else if (isEndOfWord) {
-    wordsTyped++;
-    passedWords.push(currentWord);
-    TYPED_VALUE_ELEMENT.value = "";
-    wordIndex++;
-    QUOTE_ELEMENT.childNodes[wordIndex].className =
-      "text-accent-content bg-accent";
-  } else if (isCurrentlyCorrect) {
+  updatePassedWordsStyles();
+}
+
+function isEndOfSentence(currentWord, typedValue) {
+  return typedValue === currentWord && wordIndex === words.length - 1;
+}
+
+function isEndOfWord(currentWord, typedValue) {
+  return typedValue.endsWith(" ") && typedValue.trim() === currentWord;
+}
+
+function handleEndOfSentence() {
+  let { quotes } = data;
+  const ifRestart = true;
+  const newData = { quotes: quotes, restart: ifRestart };
+  startGame(newData);
+  wordsTyped++;
+}
+
+function handleEndOfWord() {
+  wordsTyped++;
+  passedWords.push(words[wordIndex]);
+  TYPED_VALUE_ELEMENT.value = "";
+  wordIndex++;
+  QUOTE_ELEMENT.childNodes[wordIndex].className =
+    "text-accent-content bg-accent";
+}
+
+function handleTypingStatus(currentWord, typedValue) {
+  if (currentWord.startsWith(typedValue)) {
     TYPED_VALUE_ELEMENT.className =
       "input input-accent w-full max-w-xs  inline-block align-middle mt-2";
     START_BUTTON.className =
@@ -146,7 +164,9 @@ function handleInput() {
     QUOTE_ELEMENT.childNodes[wordIndex].className =
       "text-primary-content bg-primary";
   }
+}
 
+function updatePassedWordsStyles() {
   for (let i = 0; i < passedWords.length; i++) {
     QUOTE_ELEMENT.childNodes[i].classList.add(
       "text-neutral-content",
@@ -154,6 +174,7 @@ function handleInput() {
     );
   }
 }
+
 
 let timerInterval;
 
