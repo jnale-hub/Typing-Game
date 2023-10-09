@@ -69,13 +69,21 @@ const TYPED_VALUE_ELEMENT = document.getElementById("typed-value");
 const START_BUTTON = document.getElementById("start");
 const TIME_ALLOTMENT = 120;
 
-let words = [];
-let passedWords = [];
-let wordIndex = 0;
-let wordsTyped = 0;
-
+// Encapsulate game-related data and functions
+const gameData = {
+  words: [],
+  passedWords: [],
+  wordIndex: 0,
+  wordsTyped: 0,
+};
 
 function startGame(data) {
+  // Reset the gameData
+  gameData.words = [];
+  gameData.passedWords = [];
+  gameData.wordIndex = 0;
+  gameData.wordsTyped = 0;
+
   const quotes = data.quotes;
   TYPED_VALUE_ELEMENT.disabled = false;
   document.querySelector(".countdown").classList.remove("hidden");
@@ -89,17 +97,12 @@ function startGame(data) {
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
 
-  console.log(quotes);
   // Put the quote into an array of words
-  words = quote.split(" ");
-
-  // Reset word tracking
-  wordIndex = 0;
-  passedWords = [];
+  gameData.words = quote.split(" ");
 
   // UI updates
   START_BUTTON.innerText = "Restart";
-  const spanWords = words.map((word) => `<span>${word} </span>`);
+  const spanWords = gameData.words.map((word) => `<span>${word} </span>`);
   QUOTE_ELEMENT.innerHTML = spanWords.join("");
   QUOTE_ELEMENT.childNodes[0].className = "text-accent-content bg-accent";
 
@@ -109,7 +112,7 @@ function startGame(data) {
 }
 
 function handleInput() {
-  const currentWord = words[wordIndex];
+  const currentWord = gameData.words[gameData.wordIndex];
   const typedValue = TYPED_VALUE_ELEMENT.value;
 
   if (isEndOfSentence(currentWord, typedValue)) {
@@ -124,7 +127,7 @@ function handleInput() {
 }
 
 function isEndOfSentence(currentWord, typedValue) {
-  return typedValue === currentWord && wordIndex === words.length - 1;
+  return typedValue === currentWord && gameData.wordIndex === gameData.words.length - 1;
 }
 
 function isEndOfWord(currentWord, typedValue) {
@@ -132,46 +135,34 @@ function isEndOfWord(currentWord, typedValue) {
 }
 
 function handleEndOfSentence() {
-  let { quotes } = data;
-  const ifRestart = true;
-  const newData = { quotes: quotes, restart: ifRestart };
-  startGame(newData);
-  wordsTyped++;
+  data.restart = true;
+  startGame(data);
+  gameData.wordsTyped++;
 }
 
 function handleEndOfWord() {
-  wordsTyped++;
-  passedWords.push(words[wordIndex]);
+  gameData.wordsTyped++;
+  gameData.passedWords.push(gameData.words[gameData.wordIndex]);
   TYPED_VALUE_ELEMENT.value = "";
-  wordIndex++;
-  QUOTE_ELEMENT.childNodes[wordIndex].className =
-    "text-accent-content bg-accent";
+  gameData.wordIndex++;
+  QUOTE_ELEMENT.childNodes[gameData.wordIndex].className = "text-accent-content bg-accent";
 }
 
 function handleTypingStatus(currentWord, typedValue) {
   if (currentWord.startsWith(typedValue)) {
-    TYPED_VALUE_ELEMENT.className =
-      "input input-accent w-full max-w-xs  inline-block align-middle mt-2";
-    START_BUTTON.className =
-      "btn btn-accent text-accent-content inline-block align-middle mt-2 ml-2";
-    QUOTE_ELEMENT.childNodes[wordIndex].className =
-      "text-accent-content bg-accent";
+    TYPED_VALUE_ELEMENT.className = "input input-accent w-full max-w-xs  inline-block align-middle mt-2";
+    START_BUTTON.className = "btn btn-accent text-accent-content inline-block align-middle mt-2 ml-2";
+    QUOTE_ELEMENT.childNodes[gameData.wordIndex].className = "text-accent-content bg-accent";
   } else {
-    START_BUTTON.className =
-      "btn btn-primary text-primary-content inline-block align-middle mt-2 ml-2";
-    TYPED_VALUE_ELEMENT.className =
-      "input input-primary w-full max-w-xs  inline-block align-middle mt-2";
-    QUOTE_ELEMENT.childNodes[wordIndex].className =
-      "text-primary-content bg-primary";
+    START_BUTTON.className = "btn btn-primary text-primary-content inline-block align-middle mt-2 ml-2";
+    TYPED_VALUE_ELEMENT.className = "input input-primary w-full max-w-xs  inline-block align-middle mt-2";
+    QUOTE_ELEMENT.childNodes[gameData.wordIndex].className = "text-primary-content bg-primary";
   }
 }
 
 function updatePassedWordsStyles() {
-  for (let i = 0; i < passedWords.length; i++) {
-    QUOTE_ELEMENT.childNodes[i].classList.add(
-      "text-neutral-content",
-      "bg-neutral"
-    );
+  for (let i = 0; i < gameData.passedWords.length; i++) {
+    QUOTE_ELEMENT.childNodes[i].classList.add("text-neutral-content", "bg-neutral");
   }
 }
 
@@ -216,7 +207,7 @@ function handleGameOver() {
 
   // Calculate elapsed time in minutes
   const time = TIME_ALLOTMENT / 60;
-  const wpm = Math.round(wordsTyped / time);
+  const wpm = Math.round(gameData.wordsTyped / time);
 
   MESSAGE_ELEMENT.innerText = "TIMES UP!";
   document.querySelector(".countdown").classList.add("hidden");
