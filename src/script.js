@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function handleDropdown(data) {
-  let { quotes } = data;
   const dropdownButton = document.querySelector(".dropdown label");
   const dropdownItems = document.querySelectorAll(".dropdown-item");
   const htmlTheme = document.querySelector("html");
@@ -36,30 +35,29 @@ function handleDropdown(data) {
       // Assign the quotes based on the clicked item's id
       switch (item.id) {
         case "sherlock":
-          quotes = sherlockQuotes;
+          data.quotes = sherlockQuotes;
           htmlTheme.dataset.theme = "retro";
           break;
         case "strangerThings":
-          quotes = strangerThingsQuotes;
+          data.quotes = strangerThingsQuotes;
           htmlTheme.dataset.theme = "stranger";
           break;
         case "modernFamily":
-          quotes = modernFamilyQuotes;
+          data.quotes = modernFamilyQuotes;
           htmlTheme.dataset.theme = "fantasy";
           break;
         case "gameOfThrones":
-          quotes = gameOfThronesQuotes;
+          data.quotes = gameOfThronesQuotes;
           htmlTheme.dataset.theme = "got";
           break;
         case "moneyHeist":
-          quotes = moneyHeistQuotes;
+          data.quotes = moneyHeistQuotes;
           htmlTheme.dataset.theme = "money_heist";
           break;
       }
       dropdownButton.innerText = item.innerText;
       document.querySelector("title").innerText = item.innerText + " | Typing Game";
-      const newData = { quotes: quotes };
-      startGame(newData);
+      startGame(data);
     });
   });
 }
@@ -78,14 +76,13 @@ let wordsTyped = 0;
 
 
 function startGame(data) {
-  const { quotes, restart } = data;
-  console.log(quotes);
+  const quotes = data.quotes;
   TYPED_VALUE_ELEMENT.disabled = false;
   document.querySelector(".countdown").classList.remove("hidden");
   document.getElementById("wpm").innerText = "";
   MESSAGE_ELEMENT.innerText = "";
 
-  if (restart !== true) {
+  if (data.restart !== true) {
     timer();
   }
 
