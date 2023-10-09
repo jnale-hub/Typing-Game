@@ -9,19 +9,18 @@ import {
 
 // Encapsulate the data
 const data = {
-  quotes : sherlockQuotes,
-  restart : null,
+  quotes: sherlockQuotes,
+  restart: null,
 };
 
 // Call the initializeDropdown function when your page loads
 document.addEventListener("DOMContentLoaded", () => {
-
   START_BUTTON.addEventListener("click", () => {
     startGame(data);
   });
 
   TYPED_VALUE_ELEMENT.addEventListener("input", handleInput);
-  
+
   handleDropdown(data);
 });
 
@@ -56,18 +55,17 @@ function handleDropdown(data) {
           break;
       }
       dropdownButton.innerText = item.innerText;
-      document.querySelector("title").innerText = item.innerText + " | Typing Game";
+      document.querySelector("title").innerText =
+        item.innerText + " | Typing Game";
       startGame(data);
     });
   });
 }
 
-// Constants
 const QUOTE_ELEMENT = document.getElementById("quote");
 const MESSAGE_ELEMENT = document.getElementById("message");
 const TYPED_VALUE_ELEMENT = document.getElementById("typed-value");
 const START_BUTTON = document.getElementById("start");
-const TIME_ALLOTMENT = 120;
 
 // Encapsulate game-related data and functions
 const gameData = {
@@ -127,7 +125,10 @@ function handleInput() {
 }
 
 function isEndOfSentence(currentWord, typedValue) {
-  return typedValue === currentWord && gameData.wordIndex === gameData.words.length - 1;
+  return (
+    typedValue === currentWord &&
+    gameData.wordIndex === gameData.words.length - 1
+  );
 }
 
 function isEndOfWord(currentWord, typedValue) {
@@ -145,28 +146,39 @@ function handleEndOfWord() {
   gameData.passedWords.push(gameData.words[gameData.wordIndex]);
   TYPED_VALUE_ELEMENT.value = "";
   gameData.wordIndex++;
-  QUOTE_ELEMENT.childNodes[gameData.wordIndex].className = "text-accent-content bg-accent";
+  QUOTE_ELEMENT.childNodes[gameData.wordIndex].className =
+    "text-accent-content bg-accent";
 }
 
 function handleTypingStatus(currentWord, typedValue) {
   if (currentWord.startsWith(typedValue)) {
-    TYPED_VALUE_ELEMENT.className = "input input-accent w-full max-w-xs  inline-block align-middle mt-2";
-    START_BUTTON.className = "btn btn-accent text-accent-content inline-block align-middle mt-2 ml-2";
-    QUOTE_ELEMENT.childNodes[gameData.wordIndex].className = "text-accent-content bg-accent";
+    TYPED_VALUE_ELEMENT.className =
+      "input input-accent w-full max-w-xs  inline-block align-middle mt-2";
+    START_BUTTON.className =
+      "btn btn-accent text-accent-content inline-block align-middle mt-2 ml-2";
+    QUOTE_ELEMENT.childNodes[gameData.wordIndex].className =
+      "text-accent-content bg-accent";
   } else {
-    START_BUTTON.className = "btn btn-primary text-primary-content inline-block align-middle mt-2 ml-2";
-    TYPED_VALUE_ELEMENT.className = "input input-primary w-full max-w-xs  inline-block align-middle mt-2";
-    QUOTE_ELEMENT.childNodes[gameData.wordIndex].className = "text-primary-content bg-primary";
+    START_BUTTON.className =
+      "btn btn-primary text-primary-content inline-block align-middle mt-2 ml-2";
+    TYPED_VALUE_ELEMENT.className =
+      "input input-primary w-full max-w-xs  inline-block align-middle mt-2";
+    QUOTE_ELEMENT.childNodes[gameData.wordIndex].className =
+      "text-primary-content bg-primary";
   }
 }
 
 function updatePassedWordsStyles() {
   for (let i = 0; i < gameData.passedWords.length; i++) {
-    QUOTE_ELEMENT.childNodes[i].classList.add("text-neutral-content", "bg-neutral");
+    QUOTE_ELEMENT.childNodes[i].classList.add(
+      "text-neutral-content",
+      "bg-neutral"
+    );
   }
 }
 
-
+// Timer
+const TIME_ALLOTMENT = 120;
 let timerInterval;
 
 function timer() {
