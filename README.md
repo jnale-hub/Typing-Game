@@ -12,7 +12,7 @@ Live Demo: https://jnale-hub.github.io/Typing-Game/
 
 ## Screenshots
 
-| Column 1 | Column 2 | Column 3 |
+| Modern Family | Sherlock Holmes | Stranger Things |
 | --- | --- | --- |
 | ![Modern Family](assets/modernfamily.png) | ![Sherlock](assets/sherlock.png) | ![Stranger Things](assets/stangerthings.png) |
 
