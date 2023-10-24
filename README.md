@@ -12,17 +12,9 @@ Live Demo: https://jnale-hub.github.io/Typing-Game/
 
 ## Screenshots
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-  <div style="flex: 1; max-width: 300px; margin: 10px;">
-    <img src="assets/modernfamily.png" alt="Modern Family" style="max-width: 100%;">
-  </div>
-  <div style="flex: 1; max-width: 300px; margin: 10px;">
-    <img src="assets/sherlock.png" alt="Sherlock" style="max-width: 100%;">
-  </div>
-  <div style="flex: 1; max-width: 300px; margin: 10px;">
-    <img src="assets/stangerthings.png" alt="Stranger Things" style="max-width: 100%;">
-  </div>
-</div>
+| Column 1 | Column 2 | Column 3 |
+| --- | --- | --- |
+| ![Modern Family](assets/modernfamily.png) | ![Sherlock](assets/sherlock.png) | ![Stranger Things](assets/stangerthings.png) |
 
 
 ## Run Locally
