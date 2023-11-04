@@ -179,9 +179,10 @@ function updatePassedWordsStyles() {
 
 // Timer
 const TIME_ALLOTMENT = 120;
-let timerInterval;
 
 function timer() {
+  let timerInterval;
+
   let remainingTime = TIME_ALLOTMENT;
 
   const minutesSpan = document.getElementById("minutes");
