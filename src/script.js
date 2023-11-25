@@ -178,7 +178,7 @@ function updatePassedWordsStyles() {
 }
 
 // Timer
-const TIME_ALLOTMENT = 20;
+const TIME_ALLOTMENT = 120;
 let timerInterval;
 function timer() {
 
